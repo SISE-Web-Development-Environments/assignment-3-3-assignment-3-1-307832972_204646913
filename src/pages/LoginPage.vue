@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="title">Login</h1>
+    <h1 class="title text-center">Sign in</h1>
     <b-form @submit.prevent="onLogin">
       <b-form-group
         id="input-group-Username"
@@ -72,19 +72,19 @@ export default {
       form: {
         username: "",
         password: "",
-        submitError: undefined
-      }
+        submitError: undefined,
+      },
     };
   },
   validations: {
     form: {
       username: {
-        required
+        required,
       },
       password: {
-        required
-      }
-    }
+        required,
+      },
+    },
   },
   methods: {
     validateState(param) {
@@ -97,14 +97,14 @@ export default {
           "https://test-for-3-2.herokuapp.com/user/Login",
           {
             username: this.form.username,
-            password: this.form.password
+            password: this.form.password,
           }
         );
         // console.log(response);
         // this.$root.loggedIn = true;
         console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
-        this.$router.push("/");
+        this.$router.push("/").catch();
       } catch (err) {
         console.log(err.response);
         this.form.submitError = err.response.data.message;
@@ -120,8 +120,8 @@ export default {
       // console.log("login method go");
 
       this.Login();
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
