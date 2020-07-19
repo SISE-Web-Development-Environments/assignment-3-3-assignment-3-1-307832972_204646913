@@ -75,9 +75,8 @@ export default {
           this.$root.store.base_url + "/logout"
         );
 
-        console.log(this.$root.store.login);
         this.$root.store.logout();
-        if (this.$router.name != "main") {
+        if (this.$router.currentRoute.name != "main") {
           this.$router.push("/").catch();
         }
         //this.$router.push("/").catch();

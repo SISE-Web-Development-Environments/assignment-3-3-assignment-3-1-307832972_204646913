@@ -77,16 +77,12 @@ const shared_data = {
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;
-    console.log("login", this.username);
   },
   logout() {
-    console.log("logout");
     localStorage.removeItem("username");
     this.username = undefined;
   }
 };
-console.log(shared_data);
-// Vue.prototype.$root.store = shared_data;
 
 new Vue({
   router,

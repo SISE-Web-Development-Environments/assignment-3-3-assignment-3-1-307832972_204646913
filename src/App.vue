@@ -3,6 +3,11 @@
     <Navbar />
     <br />
     <router-view />
+    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <big>Copyright &copy; Omer Hofman and Yiftah Szoke</big>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -29,6 +34,10 @@ export default {
 
 <style lang="scss">
 @import "@/scss/form-style.scss";
+
+#sticky-footer {
+  flex-shrink: none;
+}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

@@ -18,24 +18,9 @@
         <LoginPage></LoginPage>
       </b-col>
       <b-col v-else>
-        <!-- <RandomRecipePreviewList
-          title="Last Viewed Recipes"
-          :class="{
-            RandomRecipes: true,
-            blur: !$root.store.username,
-            center: true
-          }"
-          disabled
-        ></RandomRecipePreviewList> -->
         <LastWatchedRecipePreviewList></LastWatchedRecipePreviewList>
       </b-col>
     </b-row>
-
-    <!-- <div
-      style="position: absolute;top: 70%;left: 50%;transform: translate(-50%, -50%);"
-    >
-      Centeredasdasdad
-    </div>-->
   </b-container>
 </template>
 

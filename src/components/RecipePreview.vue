@@ -29,8 +29,12 @@
           <b-container class="bv-example-row">
             <b-row>
               <b-col>
-                <li>{{ recipe.readyInMinutes }} minutes</li>
-                <li>{{ recipe.aggregateLikes }} likes</li>
+                <li>
+                  <strong>{{ recipe.readyInMinutes }} minutes</strong>
+                </li>
+                <li>
+                  <strong>{{ recipe.aggregateLikes }} likes</strong>
+                </li>
               </b-col>
               <b-col
                 ><span v-if="watched">
@@ -111,8 +115,12 @@
         </router-link>
 
         <b-card-text>
-          <li>{{ recipe.readyInMinutes }} minutes</li>
-          <li v-if="recipe.popularity">{{ recipe.popularity }} likes</li>
+          <li>
+            <strong>{{ recipe.readyInMinutes }} minutes</strong>
+          </li>
+          <li v-if="recipe.popularity">
+            <strong>{{ recipe.popularity }} likes</strong>
+          </li>
           <li v-if="recipe.recipe_owner">
             <strong>Owner: </strong>{{ recipe.recipe_owner }}
           </li>
@@ -185,7 +193,7 @@ export default {
       required: true
     }
   },
-  mounted() {
+  created() {
     if (!this.recipe.title) {
       this.specialRecipe = false;
     }
@@ -207,8 +215,10 @@ export default {
               ids +
               "]"
           );
-          this.saved = response.data[0][this.recipe.id].saved;
-          this.watched = response.data[0][this.recipe.id].watched;
+          if (response.data[0]) {
+            this.saved = response.data[0][this.recipe.id].saved;
+            this.watched = response.data[0][this.recipe.id].watched;
+          }
         }
       } catch (error) {
         console.log(error);

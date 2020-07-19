@@ -14,8 +14,8 @@
     <div v-else>
       <div>
         <b-row>
-          <div v-for="r in recipes" :key="r.id">
-            <RecipePreview class="recipePreview" :recipe="r" />
+          <div v-for="a in recipes" :key="a.id">
+            <RecipePreview class="recipePreview" :recipe="a" />
           </div>
         </b-row>
       </div>

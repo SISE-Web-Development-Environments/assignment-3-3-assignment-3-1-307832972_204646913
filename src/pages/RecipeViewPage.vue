@@ -159,6 +159,7 @@ export default {
     } catch (error) {
       console.log(error);
     }
+    this.updateButton();
   },
   methods: {
     async addToFavorite(id) {
@@ -167,6 +168,25 @@ export default {
           this.$root.store.base_url + "/users/addRecipeToFavorite/" + id
         );
         this.saved = true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async updateButton() {
+      try {
+        if (this.$root.store.username) {
+          const ids = [];
+          ids.push(this.recipe.id);
+          const response = await this.axios.get(
+            this.$root.store.base_url +
+              "/users/getUserInfoOnRecipes/[" +
+              ids +
+              "]"
+          );
+          if (response.data[0]) {
+            this.saved = response.data[0][this.recipe.id].saved;
+          }
+        }
       } catch (error) {
         console.log(error);
       }

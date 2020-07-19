@@ -280,9 +280,7 @@ export default {
     }
   },
   mounted() {
-    // console.log("mounted");
     this.countries.push(...countries);
-    // console.log($v);
   },
   methods: {
     validateState(param) {
@@ -312,21 +310,10 @@ export default {
       }
     },
     onRegister() {
-      // this.form = {
-      //   username: "",
-      //   firstName: "",
-      //   lastName: "",
-      //   country: null,
-      //   password: "",
-      //   confirmedPassword: "",
-      //   email: "",
-      //   profilePicture: ""
-      // };
       this.$v.form.$touch();
       if (this.$v.form.$anyError) {
         return;
       }
-      // console.log("register method go");
       this.Register();
     },
     onReset() {

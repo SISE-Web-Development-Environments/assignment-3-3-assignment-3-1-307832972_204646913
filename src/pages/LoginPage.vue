@@ -62,9 +62,6 @@
     >
       Login failed: {{ form.submitError }}
     </b-alert>
-    <!-- <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card> -->
   </div>
 </template>
 
@@ -109,10 +106,8 @@ export default {
         // console.log(response);
         // this.$root.loggedIn = true;
         this.WrongInput = false;
-        console.log(this.$root.store.login);
         this.$root.store.login(this.form.userName);
-        console.log(this.$router);
-        if (this.$router.name != "main") {
+        if (this.$router.currentRoute.name != "main") {
           this.$router.push("/").catch();
         }
       } catch (err) {

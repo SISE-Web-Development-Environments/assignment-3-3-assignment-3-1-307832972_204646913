@@ -29,7 +29,6 @@ export default {
           this.$root.store.base_url + "/users/myFavoriteRecipes"
         );
 
-        //console.log(response);
         const recipes = response.data;
         if (recipes != "OK") {
           this.recipes = [];
@@ -38,8 +37,6 @@ export default {
         if (this.recipes.length < 1) {
           this.message = "this user don't have favorite recipies yet";
         }
-
-        console.log(this.recipes);
       } catch (error) {
         console.log(error);
       }
