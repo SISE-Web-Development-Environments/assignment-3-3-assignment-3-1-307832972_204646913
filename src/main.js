@@ -2,12 +2,13 @@ import Vue from "vue";
 import App from "./App.vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
-
+import VueCookies from "vue-cookies";
+Vue.use(VueCookies);
 import routes from "./routes";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 const router = new VueRouter({
-  routes,
+  routes
 });
 
 import Vuelidate from "vuelidate";
@@ -24,6 +25,8 @@ import {
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
+  IconsPlugin,
+  VBHoverPlugin
 } from "bootstrap-vue";
 [
   FormGroupPlugin,
@@ -36,7 +39,9 @@ import {
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
-].forEach((x) => Vue.use(x));
+  IconsPlugin,
+  VBHoverPlugin
+].forEach(x => Vue.use(x));
 Vue.use(Vuelidate);
 
 axios.interceptors.request.use(
@@ -67,6 +72,7 @@ Vue.use(VueAxios, axios);
 Vue.config.productionTip = false;
 
 const shared_data = {
+  base_url: "http://localhost:4000",
   username: localStorage.username,
   login(username) {
     localStorage.setItem("username", username);
@@ -77,7 +83,7 @@ const shared_data = {
     console.log("logout");
     localStorage.removeItem("username");
     this.username = undefined;
-  },
+  }
 };
 console.log(shared_data);
 // Vue.prototype.$root.store = shared_data;
@@ -86,7 +92,7 @@ new Vue({
   router,
   data() {
     return {
-      store: shared_data,
+      store: shared_data
     };
   },
   methods: {
@@ -97,9 +103,9 @@ new Vue({
         variant: variant,
         solid: true,
         appendToast: append,
-        autoHideDelay: 3000,
+        autoHideDelay: 3000
       });
-    },
+    }
   },
-  render: (h) => h(App),
+  render: h => h(App)
 }).$mount("#app");

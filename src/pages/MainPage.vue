@@ -2,12 +2,14 @@
   <b-container class="container">
     <b-row>
       <b-col>
-        <h1 class="title text-center">Main Page</h1>
+        <div class="title text-center">
+          <img :src="pic" style="width: 500px; height: 400px;" />
+        </div>
       </b-col>
     </b-row>
     <b-row>
       <b-col>
-        <RecipePreviewList
+        <RandomRecipePreviewList
           title="Randome Recipes"
           class="RandomRecipes center"
         />
@@ -16,15 +18,16 @@
         <LoginPage></LoginPage>
       </b-col>
       <b-col v-else>
-        <RecipePreviewList
+        <!-- <RandomRecipePreviewList
           title="Last Viewed Recipes"
           :class="{
             RandomRecipes: true,
             blur: !$root.store.username,
-            center: true,
+            center: true
           }"
           disabled
-        ></RecipePreviewList>
+        ></RandomRecipePreviewList> -->
+        <LastWatchedRecipePreviewList></LastWatchedRecipePreviewList>
       </b-col>
     </b-row>
 
@@ -37,26 +40,26 @@
 </template>
 
 <script>
-import RecipePreviewList from "../components/RecipePreviewList";
+import RandomRecipePreviewList from "../components/RandomRecipePreviewList";
+import LastWatchedRecipePreviewList from "../components/LastWatchedRecipePreviewList";
 import LoginPage from "../pages/LoginPage";
 export default {
-  components: {
-    RecipePreviewList,
-    LoginPage,
+  data() {
+    return {
+      pic:
+        "https://res.cloudinary.com/df6ppuehr/image/upload/v1594990708/logo_cda2cj.jpg"
+    };
   },
+  components: {
+    RandomRecipePreviewList,
+    LastWatchedRecipePreviewList,
+    LoginPage
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .RandomRecipes {
   margin: 10px 0 10px;
-}
-.blur {
-  -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
-  filter: blur(2px);
-}
-::v-deep .blur .recipe-preview {
-  pointer-events: none;
-  cursor: default;
 }
 </style>

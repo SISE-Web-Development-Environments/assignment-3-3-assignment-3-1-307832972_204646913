@@ -10,9 +10,10 @@
       >
         <b-form-input
           id="Username"
-          v-model="$v.form.username.$model"
+          v-model="$v.form.userName.$model"
           type="text"
-          :state="validateState('username')"
+          :state="validateState('userName')"
+          placeholder="Enter Username"
         ></b-form-input>
         <b-form-invalid-feedback>
           Username is required
@@ -30,6 +31,7 @@
           type="password"
           v-model="$v.form.password.$model"
           :state="validateState('password')"
+          placeholder="Enter Password"
         ></b-form-input>
         <b-form-invalid-feedback>
           Password is required
@@ -48,6 +50,9 @@
         <router-link to="register"> Register in here</router-link>
       </div>
     </b-form>
+    <div v-if="WrongInput">
+      <h3>Wrong user name or password</h3>
+    </div>
     <b-alert
       class="mt-2"
       v-if="form.submitError"
@@ -69,22 +74,23 @@ export default {
   name: "Login",
   data() {
     return {
+      WrongInput: false,
       form: {
-        username: "",
+        userName: "",
         password: "",
-        submitError: undefined,
-      },
+        submitError: undefined
+      }
     };
   },
   validations: {
     form: {
-      username: {
-        required,
+      userName: {
+        required
       },
       password: {
-        required,
-      },
-    },
+        required
+      }
+    }
   },
   methods: {
     validateState(param) {
@@ -94,20 +100,25 @@ export default {
     async Login() {
       try {
         const response = await this.axios.post(
-          "https://test-for-3-2.herokuapp.com/user/Login",
+          this.$root.store.base_url + "/login",
           {
-            username: this.form.username,
-            password: this.form.password,
+            userName: this.form.userName,
+            password: this.form.password
           }
         );
         // console.log(response);
         // this.$root.loggedIn = true;
+        this.WrongInput = false;
         console.log(this.$root.store.login);
-        this.$root.store.login(this.form.username);
-        this.$router.push("/").catch();
+        this.$root.store.login(this.form.userName);
+        console.log(this.$router);
+        if (this.$router.name != "main") {
+          this.$router.push("/").catch();
+        }
       } catch (err) {
         console.log(err.response);
         this.form.submitError = err.response.data.message;
+        this.WrongInput = true;
       }
     },
     onLogin() {
@@ -120,8 +131,8 @@ export default {
       // console.log("login method go");
 
       this.Login();
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
